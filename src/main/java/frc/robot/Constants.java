@@ -51,8 +51,20 @@ public final class Constants
 
   public static class EndEffectorConstants 
   {
+    // End Effector IDs
     public static final int kEndEffectorIntakeID = 23;
     public static final int kEndEffectorPivotID = 22;
+    // End Effector Speeds
+    public static final double kIntakeSpeed = 0.5;
+    public static final double kPivotSpeed = 0.5;
+    // End Effector Current Spike
+    public static final double kIntakeCurrentSpike = 10;
+    // End Effector PID Values
+    public static final double kIntakePivotPIDValueP = 0;
+    public static final double kIntakePivotPIDValueI = 0;
+    public static final double kIntakePivotPIDValueD = 0;
+
+
 
   }
 }
