@@ -84,4 +84,17 @@ public final class Constants
     public static final int kCoralGroundBeamBreakID = 0;
 
   }
+
+  public static class ElevatorConstants{
+
+    public static final int kElevatorRightMotorID = 18;
+    public static final int kElevatorLeftMotorID = 19;
+    public static final double kElevatorPivotPIDValueP = 0;
+    public static final double kElevatorPivotPIDValueI = 0;
+    public static final double kElevatorPivotPIDValueD = 0;
+    // public static final double 
+    public static final int kElevatorBeamBreakID = 2;
+
+
+  }
 }
