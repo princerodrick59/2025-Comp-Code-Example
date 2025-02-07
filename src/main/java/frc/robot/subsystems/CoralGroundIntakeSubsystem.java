@@ -4,15 +4,11 @@
 
 package frc.robot.subsystems;
 
-import javax.swing.text.Position;
-
 import org.littletonrobotics.junction.AutoLogOutput;
 
 import com.ctre.phoenix6.configs.MotorOutputConfigs;
-import com.ctre.phoenix6.configs.Slot0Configs;
 import com.ctre.phoenix6.configs.TalonFXConfiguration;
 import com.ctre.phoenix6.configs.TalonFXSConfiguration;
-import com.ctre.phoenix6.controls.PositionVoltage;
 import com.ctre.phoenix6.hardware.TalonFX;
 import com.ctre.phoenix6.hardware.TalonFXS;
 import com.ctre.phoenix6.signals.InvertedValue;
@@ -27,16 +23,17 @@ import frc.robot.Constants.CoralGroundIntakeConstants;
 public class CoralGroundIntakeSubsystem extends SubsystemBase {
   /** Creates a new CoralGroundIntake. */
 
+  // Coral Ground Intake
   private TalonFXS coralIntake;
   private TalonFX intakePivot;
-
+  // Intake Configs
   private TalonFXSConfiguration intakeConfigs;
   private TalonFXConfiguration pivotConfigs;
-
+  // Pivot Encoder
   private DutyCycleEncoder pivotEncoder;
-
+  // Intake Beam Break
   private DigitalInput intakeBeamBreak;
-
+  // Pivot PID Controller
   private PIDController pivotPIDController;
 
   public CoralGroundIntakeSubsystem() {
@@ -47,7 +44,7 @@ public class CoralGroundIntakeSubsystem extends SubsystemBase {
 
     // Intake Beam Break
     intakeBeamBreak = new DigitalInput(CoralGroundIntakeConstants.kCoralGroundBeamBreakID);
-
+    // Pivot Encoder
     pivotEncoder = new DutyCycleEncoder(CoralGroundIntakeConstants.kCoralGroundPivotEncoderPort);
 
     // Intake Configs

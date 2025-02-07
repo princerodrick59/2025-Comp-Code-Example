@@ -90,14 +90,27 @@ public final class Constants
   }
 
   public static class ElevatorConstants{
-
+    // Elevator Motor IDs
     public static final int kElevatorRightMotorID = 18;
     public static final int kElevatorLeftMotorID = 19;
-    public static final double kElevatorPivotPIDValueP = 0;
-    public static final double kElevatorPivotPIDValueI = 0;
-    public static final double kElevatorPivotPIDValueD = 0;
-    // public static final double 
-    public static final int kElevatorBeamBreakID = 2;
+
+    // Elevator PID Values
+    public static final double kElevatorPIDValueP = 0;
+    public static final double kElevatorPIDValueI = 0;
+    public static final double kElevatorPIDValueD = 0;
+    public static final double kElevatorPIDValueS = 0;
+    public static final double kElevatorPIDValueV = 0;
+    public static final double kElevatorPIDValueA = 0;
+    public static final double kElevatorPIDValueG = 0;
+    // Sensor To Mechanism Ratio
+    public static final double kElevatorSensorToMechRatio = 0;
+    // Motion Magic Configs
+    public static final double kElevatorMotionMagicAcceleration = 0;
+    public static final double kElevatorMotionMagicCruiseVelocity = 0;
+    // Elevator Speed
+    public static final double kElevatorSpeed = 0.25;
+    
+
 
 
   }
