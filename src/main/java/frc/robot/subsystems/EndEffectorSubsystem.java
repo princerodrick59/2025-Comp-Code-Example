@@ -18,6 +18,7 @@ import com.ctre.phoenix6.signals.FeedbackSensorSourceValue;
 import com.ctre.phoenix6.signals.InvertedValue;
 import com.ctre.phoenix6.signals.NeutralModeValue;
 
+import edu.wpi.first.math.controller.PIDController;
 import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.DutyCycleEncoder;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
@@ -40,10 +41,9 @@ public class EndEffectorSubsystem extends SubsystemBase {
   private DigitalInput intakeBeamBreak;
   // Pivot Encoder
   private DutyCycleEncoder pivotEncoder;
-  // Need to implement candi as the encoder
 
-  // Position Request
-  private PositionVoltage positionRequest;
+  // Pivot PID Controller
+  private PIDController pivotPIDController;
 
   public EndEffectorSubsystem() {
     // End Effector Intake
@@ -53,6 +53,9 @@ public class EndEffectorSubsystem extends SubsystemBase {
 
     // Intake Beam Break
     intakeBeamBreak = new DigitalInput(EndEffectorConstants.kEndEffectorBeamBreakID);
+
+    // Pivot Encoder
+    pivotEncoder = new DutyCycleEncoder(EndEffectorConstants.kEndEffectorPivotEncoderPort);
 
     // Intake Configs
     intakeConfigs = new TalonFXSConfiguration()
@@ -65,21 +68,16 @@ public class EndEffectorSubsystem extends SubsystemBase {
 
     // Pivot Configs
     pivotConfigs = new TalonFXConfiguration()
-                        .withSlot0(new Slot0Configs()
-                                      .withKP(EndEffectorConstants.kEndEffectorPivotPIDValueP)
-                                      .withKI(EndEffectorConstants.kEndEffectorPivotPIDValueI)
-                                      .withKD(EndEffectorConstants.kEndEffectorPivotPIDValueD))
                         .withMotorOutput(new MotorOutputConfigs()
                                             .withInverted(InvertedValue.CounterClockwise_Positive)
                                             .withNeutralMode(NeutralModeValue.Brake));
     // Apply Pivot Configs
     endEffectorPivot.getConfigurator().apply(pivotConfigs);
   
-    // Pivot Position Request
-    positionRequest = new PositionVoltage(0).withSlot(0);
-
-    
-
+    // Pivot PID Controller
+    pivotPIDController = new PIDController(EndEffectorConstants.kEndEffectorPivotPIDValueP, 
+                                           EndEffectorConstants.kEndEffectorPivotPIDValueI, 
+                                           EndEffectorConstants.kEndEffectorPivotPIDValueD);
   }
 
   @Override
@@ -150,7 +148,7 @@ public class EndEffectorSubsystem extends SubsystemBase {
 
   // End Effector Pivot Position Control
   public void setPivotPosition(double position) {
-    endEffectorPivot.setControl(positionRequest.withPosition(position));
+    endEffectorPivot.set(pivotPIDController.calculate(pivotEncoder.get(), position));
   }
 
 

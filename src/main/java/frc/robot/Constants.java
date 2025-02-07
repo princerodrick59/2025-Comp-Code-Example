@@ -65,6 +65,8 @@ public final class Constants
     public static final double kEndEffectorPivotPIDValueD = 0;
     // End Effector Beam Break ID
     public static final int kEndEffectorBeamBreakID = 1;
+    // End Effector Pivot Encoder DIO Port
+    public static final int kEndEffectorPivotEncoderPort = 0;
 
   }
 
@@ -82,6 +84,8 @@ public final class Constants
     public static final double kCoralGroundPivotPIDValueD = 0;
     // Coral Ground Beam Break ID
     public static final int kCoralGroundBeamBreakID = 0;
+    // Coral Ground Pivot Encoder DIO Port
+    public static final int kCoralGroundPivotEncoderPort = 1;
 
   }
 

@@ -18,7 +18,9 @@ import com.ctre.phoenix6.hardware.TalonFXS;
 import com.ctre.phoenix6.signals.InvertedValue;
 import com.ctre.phoenix6.signals.NeutralModeValue;
 
+import edu.wpi.first.math.controller.PIDController;
 import edu.wpi.first.wpilibj.DigitalInput;
+import edu.wpi.first.wpilibj.DutyCycleEncoder;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants.CoralGroundIntakeConstants;
 
@@ -31,11 +33,11 @@ public class CoralGroundIntakeSubsystem extends SubsystemBase {
   private TalonFXSConfiguration intakeConfigs;
   private TalonFXConfiguration pivotConfigs;
 
-  private PositionVoltage positionRequest;
-
-  // need to implemnt candi as the encoder
+  private DutyCycleEncoder pivotEncoder;
 
   private DigitalInput intakeBeamBreak;
+
+  private PIDController pivotPIDController;
 
   public CoralGroundIntakeSubsystem() {
     // Coral Ground Intake
@@ -45,6 +47,8 @@ public class CoralGroundIntakeSubsystem extends SubsystemBase {
 
     // Intake Beam Break
     intakeBeamBreak = new DigitalInput(CoralGroundIntakeConstants.kCoralGroundBeamBreakID);
+
+    pivotEncoder = new DutyCycleEncoder(CoralGroundIntakeConstants.kCoralGroundPivotEncoderPort);
 
     // Intake Configs
     intakeConfigs = new TalonFXSConfiguration()
@@ -56,18 +60,16 @@ public class CoralGroundIntakeSubsystem extends SubsystemBase {
 
     // Pivot Configs
     pivotConfigs = new TalonFXConfiguration()
-                        .withSlot0(new Slot0Configs()
-                                      .withKP(CoralGroundIntakeConstants.kCoralGroundPivotPIDValueP)
-                                      .withKI(CoralGroundIntakeConstants.kCoralGroundPivotPIDValueI)
-                                      .withKD(CoralGroundIntakeConstants.kCoralGroundPivotPIDValueD))
                         .withMotorOutput(new MotorOutputConfigs()
                                             .withInverted(InvertedValue.CounterClockwise_Positive)
                                             .withNeutralMode(NeutralModeValue.Brake));
     // Apply Pivot Configs
     intakePivot.getConfigurator().apply(pivotConfigs);
 
-    // Position Request
-    positionRequest = new PositionVoltage(0).withSlot(0);
+    // Pivot PID Controller
+    pivotPIDController = new PIDController( CoralGroundIntakeConstants.kCoralGroundPivotPIDValueP, 
+                                            CoralGroundIntakeConstants.kCoralGroundPivotPIDValueI,
+                                            CoralGroundIntakeConstants.kCoralGroundPivotPIDValueD);
     
   }
 
@@ -123,7 +125,7 @@ public class CoralGroundIntakeSubsystem extends SubsystemBase {
 
   // Pivot Intake Position
   public void pivotIntakePosition(double position){
-    intakePivot.setControl(positionRequest.withPosition(position));
+    intakePivot.set(pivotPIDController.calculate(pivotEncoder.get(), position));
   }
 
 
