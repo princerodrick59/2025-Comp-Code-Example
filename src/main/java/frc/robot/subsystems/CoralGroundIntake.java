@@ -20,6 +20,7 @@ import com.ctre.phoenix6.signals.NeutralModeValue;
 
 import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
+import frc.robot.Constants.CoralGroundIntakeConstants;
 
 public class CoralGroundIntake extends SubsystemBase {
   /** Creates a new CoralGroundIntake. */
@@ -38,9 +39,9 @@ public class CoralGroundIntake extends SubsystemBase {
 
   public CoralGroundIntake() {
     // Coral Ground Intake
-    coralIntake = new TalonFXS(21);
+    coralIntake = new TalonFXS(CoralGroundIntakeConstants.kCoralIntakeID);
     // Coral Ground Intake Pivot
-    intakePivot = new TalonFX(20);
+    intakePivot = new TalonFX(CoralGroundIntakeConstants.kCoralPivotID);
 
     // Intake Configs
     intakeConfigs = new TalonFXSConfiguration()
@@ -53,9 +54,9 @@ public class CoralGroundIntake extends SubsystemBase {
     // Pivot Configs
     pivotConfigs = new TalonFXConfiguration()
                         .withSlot0(new Slot0Configs()
-                                      .withKP(0)
-                                      .withKI(0)
-                                      .withKD(0))
+                                      .withKP(CoralGroundIntakeConstants.kCoralPivotPIDValueP)
+                                      .withKI(CoralGroundIntakeConstants.kCoralPivotPIDValueI)
+                                      .withKD(CoralGroundIntakeConstants.kCoralPivotPIDValueD))
                         .withMotorOutput(new MotorOutputConfigs()
                                             .withInverted(InvertedValue.CounterClockwise_Positive)
                                             .withNeutralMode(NeutralModeValue.Brake));
@@ -74,12 +75,12 @@ public class CoralGroundIntake extends SubsystemBase {
   
   // Coral Ground Intake
   public void coralIntake() {
-    coralIntake.set(0.5);
+    coralIntake.set(CoralGroundIntakeConstants.kCoralIntakeSpeed);
   }
 
   // Coral Ground Outtake
   public void coralOuttake() {
-    coralIntake.set(-0.5);
+    coralIntake.set(-CoralGroundIntakeConstants.kCoralIntakeSpeed);
   }
 
   // Coral Ground Intake Stop
@@ -90,7 +91,7 @@ public class CoralGroundIntake extends SubsystemBase {
   // Intake Coral with Beam Break
   public void intakeCoralWithBeamBreak(){
     if(intakeBeamBreak.get()){
-      coralIntake.set(0.5);
+      coralIntake.set(CoralGroundIntakeConstants.kCoralIntakeSpeed);
     }else{
       coralIntake.set(0);
     }
@@ -104,12 +105,12 @@ public class CoralGroundIntake extends SubsystemBase {
 
   // Pivot Intake Up
   public void pivotIntakeUp(){
-    intakePivot.set(0.5);
+    intakePivot.set(CoralGroundIntakeConstants.kCoralPivotSpeed);
   }
 
   // Pivot Intake Down
   public void pivotIntakeDown(){
-    intakePivot.set(-0.5);
+    intakePivot.set(-CoralGroundIntakeConstants.kCoralPivotSpeed);
   }
 
   // Pivot Intake Stop

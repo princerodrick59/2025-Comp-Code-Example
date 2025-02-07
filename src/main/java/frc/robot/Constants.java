@@ -64,7 +64,22 @@ public final class Constants
     public static final double kIntakePivotPIDValueI = 0;
     public static final double kIntakePivotPIDValueD = 0;
 
+  }
 
+  public static class CoralGroundIntakeConstants 
+  {
+    // Coral Ground Intake IDs
+    public static final int kCoralIntakeID = 21;
+    public static final int kCoralPivotID = 20;
+    // Coral Ground Intake Speeds
+    public static final double kCoralIntakeSpeed = 0.5;
+    public static final double kCoralPivotSpeed = 0.5;
+    // Coral Ground Intake Current Spike
+    public static final double kCoralIntakeCurrentSpike = 10;
+    // Coral Ground Intake PID Values
+    public static final double kCoralPivotPIDValueP = 0;
+    public static final double kCoralPivotPIDValueI = 0;
+    public static final double kCoralPivotPIDValueD = 0;
 
   }
 }
