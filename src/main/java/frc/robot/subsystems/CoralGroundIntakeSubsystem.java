@@ -43,7 +43,7 @@ public class CoralGroundIntakeSubsystem extends SubsystemBase {
     intakePivot = new TalonFX(CoralGroundIntakeConstants.kCoralGroundPivotID);
 
     // Intake Beam Break
-    intakeBeamBreak = new DigitalInput(CoralGroundIntakeConstants.kCoralGroundBeamBreakID);
+    intakeBeamBreak = new DigitalInput(CoralGroundIntakeConstants.kCoralGroundBeamBreakPort);
     // Pivot Encoder
     pivotEncoder = new DutyCycleEncoder(CoralGroundIntakeConstants.kCoralGroundPivotEncoderPort);
 
@@ -100,7 +100,7 @@ public class CoralGroundIntakeSubsystem extends SubsystemBase {
   }
 
   // Does the Coral Ground Intake have a Coral?
-  @AutoLogOutput
+  @AutoLogOutput(key = "CoralGroundIntakeSubsystem/Intake/HasCoral?")
   public boolean hasCoral(){
     return intakeBeamBreak.get();
   }
@@ -127,31 +127,31 @@ public class CoralGroundIntakeSubsystem extends SubsystemBase {
 
 
   // Get Pivot Intake Position
-  @AutoLogOutput
+  @AutoLogOutput(key = "CoralGroundIntakeSubsystem/IntakePivot/Position")
   public double getPivotIntakePosition(){
     return intakePivot.getPosition().getValueAsDouble();
   }
 
   // get pivot intake velocity
-  @AutoLogOutput
+  @AutoLogOutput(key = "CoralGroundIntakeSubsystem/IntakePivot/Velocity")
   public double getPivotIntakeVelocity(){
     return intakePivot.getVelocity().getValueAsDouble();
   }
 
   // get pivot intake current
-  @AutoLogOutput
+  @AutoLogOutput(key = "CoralGroundIntakeSubsystem/IntakePivot/Current")
   public double getPivotIntakeCurrent(){
     return intakePivot.getSupplyCurrent().getValueAsDouble();
   }
 
   // get intake Velocity
-  @AutoLogOutput
+  @AutoLogOutput(key = "CoralGroundIntakeSubsystem/Intake/Velocity")
   public double getIntakeVelocity(){
     return coralIntake.getVelocity().getValueAsDouble();
   }
 
   // get intake current
-  @AutoLogOutput
+  @AutoLogOutput(key = "CoralGroundIntakeSubsystem/Intake/Current")
   public double getIntakeCurrent(){
     return coralIntake.getSupplyCurrent().getValueAsDouble();
   }

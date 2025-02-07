@@ -107,27 +107,27 @@ public class ElevatorSubsystem extends SubsystemBase {
 
 
   // get Elevator Position
-  @AutoLogOutput
+  @AutoLogOutput(key = "ElevatorSubsystem/Elevator/Position")
   public Distance getElevatorPosition() {
     return Units.Inches.of(elevatorLeftLeaderMotor.getPosition().getValueAsDouble());
   }
   // get Elevator Left Motor Velocity
-  @AutoLogOutput
+  @AutoLogOutput(key = "ElevatorSubsystem/ElevatorMotors/LeftMotorVelocity")
   public double getElevatorLeftMotorVelocity() {
     return elevatorLeftLeaderMotor.getVelocity().getValueAsDouble();
   }
   // get Elevator Right Motor Velocity
-  @AutoLogOutput
+  @AutoLogOutput(key = "ElevatorSubsystem/ElevatorMotors/RightMotorVelocity")
   public double getElevatorRightMotorVelocity() {
     return elevatorRightFollowerMotor.getVelocity().getValueAsDouble();
   }
   // get Elevator last Desired Position
-  @AutoLogOutput
+  @AutoLogOutput(key = "ElevatorSubsystem/Elevator/LastDesiredPosition")
   public Distance getLastDesiredPosition() {
     return lastDesiredPosition;
   }
   // is at Setpoint?
-  @AutoLogOutput
+  @AutoLogOutput(key = "ElevatorSubsystem/Elevator/IsAtSetpoint?")
   public boolean isAtSetpoint() {
     return (getElevatorPosition().compareTo(getLastDesiredPosition().minus(Units.Inches.of(0.5))) > 0) &&
             getElevatorPosition().compareTo(getLastDesiredPosition().plus(Units.Inches.of(0.5))) < 0;

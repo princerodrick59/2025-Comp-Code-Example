@@ -14,12 +14,14 @@ import com.ctre.phoenix6.hardware.TalonFXS;
 import com.ctre.phoenix6.signals.InvertedValue;
 import com.ctre.phoenix6.signals.NeutralModeValue;
 
+import edu.wpi.first.epilogue.Logged;
 import edu.wpi.first.math.controller.PIDController;
 import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.DutyCycleEncoder;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants.EndEffectorConstants;
 
+@Logged
 public class EndEffectorSubsystem extends SubsystemBase {
   /** Creates a new EndEffector. */
 
@@ -48,7 +50,7 @@ public class EndEffectorSubsystem extends SubsystemBase {
     endEffectorPivot = new TalonFX(EndEffectorConstants.kEndEffectorPivotID);
 
     // Intake Beam Break
-    intakeBeamBreak = new DigitalInput(EndEffectorConstants.kEndEffectorBeamBreakID);
+    intakeBeamBreak = new DigitalInput(EndEffectorConstants.kEndEffectorBeamBreakPort);
 
     // Pivot Encoder
     pivotEncoder = new DutyCycleEncoder(EndEffectorConstants.kEndEffectorPivotEncoderPort);
@@ -115,13 +117,13 @@ public class EndEffectorSubsystem extends SubsystemBase {
   }
 
   // Do we have coral?
-  @AutoLogOutput
+  @AutoLogOutput(key = "EndEffectorSubsystem/Intake/HasCoral?")
   public boolean hasCoral(){
     return endEffectorIntake.getSupplyCurrent().getValueAsDouble() > EndEffectorConstants.kEndEffectorCurrentSpike;
   }
 
   // Do we have algae?
-  @AutoLogOutput
+  @AutoLogOutput(key = "EndEffectorSubsystem/Intake/HasAlgae?")
   public boolean hasAlgae(){
     return intakeBeamBreak.get();
   }
@@ -149,31 +151,31 @@ public class EndEffectorSubsystem extends SubsystemBase {
 
 
   // Get Pivot Position
-  @AutoLogOutput
+  @AutoLogOutput(key = "EndEffectorSubsystem/Pivot/PivotPosition")
   public double getPivotPosition() {
     return endEffectorPivot.getPosition().getValueAsDouble();
   }
 
   // Get Pivot Velocity
-  @AutoLogOutput
+  @AutoLogOutput(key = "EndEffectorSubsystem/Pivot/PivotVelocity")
   public double getPivotVelocity() {
     return endEffectorPivot.getVelocity().getValueAsDouble();
   }
 
   // Get Pivot Current
-  @AutoLogOutput
+  @AutoLogOutput(key = "EndEffectorSubsystem/Pivot/PivotCurrent")
   public double getPivotCurrent() {
     return endEffectorPivot.getSupplyCurrent().getValueAsDouble();
   }
 
   // Get Intake Velocity
-  @AutoLogOutput
+  @AutoLogOutput(key = "EndEffectorSubsystem/Intake/IntakeVelocity")
   public double getIntakeVelocity() {
     return endEffectorIntake.getVelocity().getValueAsDouble();
   }
 
   // Get Intake Current
-  @AutoLogOutput
+  @AutoLogOutput(key = "EndEffectorSubsystem/Intake/IntakeCurrent")
   public double getIntakeCurrent() {
     return endEffectorIntake.getSupplyCurrent().getValueAsDouble();
   }
