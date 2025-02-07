@@ -48,4 +48,11 @@ public final class Constants
     public static final double RIGHT_X_DEADBAND = 0.1;
     public static final double TURN_CONSTANT    = 6;
   }
+
+  public static class EndEffectorConstants 
+  {
+    public static final int kEndEffectorIntakeID = 23;
+    public static final int kEndEffectorPivotID = 22;
+
+  }
 }
