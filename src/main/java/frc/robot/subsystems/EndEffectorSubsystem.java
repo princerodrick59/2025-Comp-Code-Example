@@ -18,10 +18,10 @@ import edu.wpi.first.epilogue.Logged;
 import edu.wpi.first.math.controller.PIDController;
 import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.DutyCycleEncoder;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants.EndEffectorConstants;
 
-@Logged
 public class EndEffectorSubsystem extends SubsystemBase {
   /** Creates a new EndEffector. */
 
@@ -78,10 +78,6 @@ public class EndEffectorSubsystem extends SubsystemBase {
                                            EndEffectorConstants.kEndEffectorPivotPIDValueD);
   }
 
-  @Override
-  public void periodic() {
-    // This method will be called once per scheduler run
-  }
 
   // End Effector Intake
   public void endEffectorIntake() {
@@ -117,13 +113,13 @@ public class EndEffectorSubsystem extends SubsystemBase {
   }
 
   // Do we have coral?
-  @AutoLogOutput(key = "EndEffectorSubsystem/Intake/HasCoral?")
+  @AutoLogOutput(key = "Subsystems/EndEffectorSubsystem/Intake/HasCoral?")
   public boolean hasCoral(){
     return endEffectorIntake.getSupplyCurrent().getValueAsDouble() > EndEffectorConstants.kEndEffectorCurrentSpike;
   }
 
   // Do we have algae?
-  @AutoLogOutput(key = "EndEffectorSubsystem/Intake/HasAlgae?")
+  @AutoLogOutput(key = "Subsystems/EndEffectorSubsystem/Intake/HasAlgae?")
   public boolean hasAlgae(){
     return intakeBeamBreak.get();
   }
@@ -151,36 +147,48 @@ public class EndEffectorSubsystem extends SubsystemBase {
 
 
   // Get Pivot Position
-  @AutoLogOutput(key = "EndEffectorSubsystem/Pivot/PivotPosition")
+  @AutoLogOutput(key = "Subsystems/EndEffectorSubsystem/Pivot/EndEffectorPivotPosition")
   public double getPivotPosition() {
     return endEffectorPivot.getPosition().getValueAsDouble();
   }
 
   // Get Pivot Velocity
-  @AutoLogOutput(key = "EndEffectorSubsystem/Pivot/PivotVelocity")
+  @AutoLogOutput(key = "Subsystems/EndEffectorSubsystem/Pivot/EndEffectorPivotVelocity")
   public double getPivotVelocity() {
     return endEffectorPivot.getVelocity().getValueAsDouble();
   }
 
   // Get Pivot Current
-  @AutoLogOutput(key = "EndEffectorSubsystem/Pivot/PivotCurrent")
+  @AutoLogOutput(key = "Subsystems/EndEffectorSubsystem/Pivot/EndEffectorPivotCurrent")
   public double getPivotCurrent() {
     return endEffectorPivot.getSupplyCurrent().getValueAsDouble();
   }
 
   // Get Intake Velocity
-  @AutoLogOutput(key = "EndEffectorSubsystem/Intake/IntakeVelocity")
+  @AutoLogOutput(key = "Subsystems/EndEffectorSubsystem/Intake/EndEffectorIntakeVelocity")
   public double getIntakeVelocity() {
     return endEffectorIntake.getVelocity().getValueAsDouble();
   }
 
   // Get Intake Current
-  @AutoLogOutput(key = "EndEffectorSubsystem/Intake/IntakeCurrent")
+  @AutoLogOutput(key = "Subsystems/EndEffectorSubsystem/Intake/EndEffectorIntakeCurrent")
   public double getIntakeCurrent() {
     return endEffectorIntake.getSupplyCurrent().getValueAsDouble();
   }
 
 
+  @Override
+  public void periodic() {
+    // This method will be called once per scheduler run
+    SmartDashboard.putBoolean("Subsystems/EndEffectorSubsystem/Intake/EndEffectorHasCoral?", hasCoral());
+    SmartDashboard.putBoolean("Subsystems/EndEffectorSubsystem/Intake/EndEffectorHasAlgae?", hasAlgae());
+    SmartDashboard.putNumber("Subsystems/EndEffectorSubsystem/Pivot/EndEffectorPivotPosition", getPivotPosition());
+    SmartDashboard.putNumber("Subsystems/EndEffectorSubsystem/Pivot/EndEffectorPivotVelocity", getPivotVelocity());
+    SmartDashboard.putNumber("Subsystems/EndEffectorSubsystem/Pivot/EndEffectorPivotCurrent", getPivotCurrent());
+    SmartDashboard.putNumber("Subsystems/EndEffectorSubsystem/Intake/EndEffectorIntakeVelocity", getIntakeVelocity());
+    SmartDashboard.putNumber("Subsystems/EndEffectorSubsystem/Intake/EndEffectorIntakeCurrent", getIntakeCurrent());
+
+  }
   
 
 

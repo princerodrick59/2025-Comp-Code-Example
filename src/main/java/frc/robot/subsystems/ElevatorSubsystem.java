@@ -21,6 +21,7 @@ import com.ctre.phoenix6.signals.StaticFeedforwardSignValue;
 
 import edu.wpi.first.units.Units;
 import edu.wpi.first.units.measure.Distance;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants.ElevatorConstants;
 
@@ -74,12 +75,8 @@ public class ElevatorSubsystem extends SubsystemBase {
     elevatorLeftLeaderMotor.getConfigurator().apply(elevatorConfigs);
     elevatorRightFollowerMotor.getConfigurator().apply(elevatorConfigs);
 
-    }
 
-  @Override
-  public void periodic() {
-    // This method will be called once per scheduler run
-  }
+    }
 
   // Elevator Up
   public void elevatorUp() {  
@@ -107,29 +104,41 @@ public class ElevatorSubsystem extends SubsystemBase {
 
 
   // get Elevator Position
-  @AutoLogOutput(key = "ElevatorSubsystem/Elevator/Position")
+  @AutoLogOutput(key = "Subsystems/ElevatorSubsystem/Elevator/ElevatorPosition")
   public Distance getElevatorPosition() {
     return Units.Inches.of(elevatorLeftLeaderMotor.getPosition().getValueAsDouble());
   }
+  public double getElevatorPositionDouble() {
+    return elevatorLeftLeaderMotor.getPosition().getValueAsDouble();
+  }
   // get Elevator Left Motor Velocity
-  @AutoLogOutput(key = "ElevatorSubsystem/ElevatorMotors/LeftMotorVelocity")
+  @AutoLogOutput(key = "Subsystems/ElevatorSubsystem/ElevatorMotors/ElevatorLeftMotorVelocity")
   public double getElevatorLeftMotorVelocity() {
     return elevatorLeftLeaderMotor.getVelocity().getValueAsDouble();
   }
   // get Elevator Right Motor Velocity
-  @AutoLogOutput(key = "ElevatorSubsystem/ElevatorMotors/RightMotorVelocity")
+  @AutoLogOutput(key = "Subsystems/ElevatorSubsystem/ElevatorMotors/ElevatorRightMotorVelocity")
   public double getElevatorRightMotorVelocity() {
     return elevatorRightFollowerMotor.getVelocity().getValueAsDouble();
   }
   // get Elevator last Desired Position
-  @AutoLogOutput(key = "ElevatorSubsystem/Elevator/LastDesiredPosition")
+  @AutoLogOutput(key = "Subsystems/ElevatorSubsystem/Elevator/ElevatorLastDesiredPosition")
   public Distance getLastDesiredPosition() {
     return lastDesiredPosition;
   }
   // is at Setpoint?
-  @AutoLogOutput(key = "ElevatorSubsystem/Elevator/IsAtSetpoint?")
+  @AutoLogOutput(key = "Subsystems/ElevatorSubsystem/Elevator/ElevatorIsAtSetpoint?")
   public boolean isAtSetpoint() {
     return (getElevatorPosition().compareTo(getLastDesiredPosition().minus(Units.Inches.of(0.5))) > 0) &&
             getElevatorPosition().compareTo(getLastDesiredPosition().plus(Units.Inches.of(0.5))) < 0;
   }
+
+  @Override
+  public void periodic() {
+    SmartDashboard.putBoolean("Subsystems/ElevatorSubsystem/Elevator/ElevatorIsAtSetpoint?", isAtSetpoint());
+    SmartDashboard.putNumber("Subsystems/ElevatorSubsystem/Elevator/ElevatorPosition", getElevatorPositionDouble());
+    SmartDashboard.putNumber("Subsystems/ElevatorSubsystem/ElevatorMotors/ElevatorLeftMotorVelocity", getElevatorLeftMotorVelocity());
+    SmartDashboard.putNumber("Subsystems/ElevatorSubsystem/ElevatorMotors/ElevatorRightMotorVelocity", getElevatorRightMotorVelocity());
+  }
+
 }

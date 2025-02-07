@@ -13,10 +13,10 @@ import com.ctre.phoenix6.hardware.TalonFX;
 import com.ctre.phoenix6.hardware.TalonFXS;
 import com.ctre.phoenix6.signals.InvertedValue;
 import com.ctre.phoenix6.signals.NeutralModeValue;
-
 import edu.wpi.first.math.controller.PIDController;
 import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.DutyCycleEncoder;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants.CoralGroundIntakeConstants;
 
@@ -70,10 +70,6 @@ public class CoralGroundIntakeSubsystem extends SubsystemBase {
     
   }
 
-  @Override
-  public void periodic() {
-    // This method will be called once per scheduler run
-  }
   
   // Coral Ground Intake
   public void coralIntake() {
@@ -100,7 +96,7 @@ public class CoralGroundIntakeSubsystem extends SubsystemBase {
   }
 
   // Does the Coral Ground Intake have a Coral?
-  @AutoLogOutput(key = "CoralGroundIntakeSubsystem/Intake/HasCoral?")
+  @AutoLogOutput(key = "Subsystems/CoralGroundIntakeSubsystem/Intake/HasCoral?")
   public boolean hasCoral(){
     return intakeBeamBreak.get();
   }
@@ -127,34 +123,48 @@ public class CoralGroundIntakeSubsystem extends SubsystemBase {
 
 
   // Get Pivot Intake Position
-  @AutoLogOutput(key = "CoralGroundIntakeSubsystem/IntakePivot/Position")
+  @AutoLogOutput(key = "Subsystems/CoralGroundIntakeSubsystem/IntakePivot/CoralGroundPivotPosition")
   public double getPivotIntakePosition(){
     return intakePivot.getPosition().getValueAsDouble();
   }
 
   // get pivot intake velocity
-  @AutoLogOutput(key = "CoralGroundIntakeSubsystem/IntakePivot/Velocity")
+  @AutoLogOutput(key = "Subsystems/CoralGroundIntakeSubsystem/IntakePivot/CoralGroundPivotVelocity")
   public double getPivotIntakeVelocity(){
     return intakePivot.getVelocity().getValueAsDouble();
   }
 
   // get pivot intake current
-  @AutoLogOutput(key = "CoralGroundIntakeSubsystem/IntakePivot/Current")
+  @AutoLogOutput(key = "Subsystems/CoralGroundIntakeSubsystem/IntakePivot/CoralGroundPivotCurrent")
   public double getPivotIntakeCurrent(){
     return intakePivot.getSupplyCurrent().getValueAsDouble();
   }
 
   // get intake Velocity
-  @AutoLogOutput(key = "CoralGroundIntakeSubsystem/Intake/Velocity")
+  @AutoLogOutput(key = "Subsystems/CoralGroundIntakeSubsystem/Intake/CoralGroundIntakeVelocity")
   public double getIntakeVelocity(){
     return coralIntake.getVelocity().getValueAsDouble();
   }
 
   // get intake current
-  @AutoLogOutput(key = "CoralGroundIntakeSubsystem/Intake/Current")
+  @AutoLogOutput(key = "Subsystems/CoralGroundIntakeSubsystem/Intake/CoralGroundIntakeCurrent")
   public double getIntakeCurrent(){
     return coralIntake.getSupplyCurrent().getValueAsDouble();
   }
+
+  @Override
+  public void periodic() {
+    // This method will be called once per scheduler run
+    SmartDashboard.putBoolean("Subsystems/CoralGroundIntakeSubsystem/Intake/CoralGroundIntakeHasCoral?", hasCoral());
+    SmartDashboard.putNumber("Subsystems/CoralGroundIntakeSubsystem/IntakePivot/CoralGroundPivotPosition", getPivotIntakePosition());
+    SmartDashboard.putNumber("Subsystems/CoralGroundIntakeSubsystem/IntakePivot/CoralGroundPivotVelocity", getPivotIntakeVelocity());
+    SmartDashboard.putNumber("Subsystems/CoralGroundIntakeSubsystem/IntakePivot/CoralGroundPivotCurrent", getPivotIntakeCurrent());
+    SmartDashboard.putNumber("Subsystems/CoralGroundIntakeSubsystem/Intake/CoralGroundIntakeVelocity", getIntakeVelocity());
+    SmartDashboard.putNumber("Subsystems/CoralGroundIntakeSubsystem/Intake/CoralGroundIntakeCurrent", getIntakeCurrent());
+
+
+  }
+
 
   
 
