@@ -4,6 +4,8 @@
 
 package frc.robot.subsystems;
 
+import org.littletonrobotics.junction.AutoLogOutput;
+
 import com.ctre.phoenix6.configs.FeedbackConfigs;
 import com.ctre.phoenix6.configs.MotorOutputConfigs;
 import com.ctre.phoenix6.configs.Slot0Configs;
@@ -116,11 +118,13 @@ public class EndEffector extends SubsystemBase {
   }
 
   // Do we have coral?
+  @AutoLogOutput
   public boolean hasCoral(){
     return endEffectorIntake.getSupplyCurrent().getValueAsDouble() > EndEffectorConstants.kIntakeCurrentSpike;
   }
 
   // Do we have algae?
+  @AutoLogOutput
   public boolean hasAlgae(){
     return intakeBeamBreak.get();
   }
@@ -147,16 +151,39 @@ public class EndEffector extends SubsystemBase {
   }
 
 
-  // Get pivot position
-  public double getEndEffectorPivot() {
-    return endEffectorPivot.get();
+  // Get Pivot Position
+  @AutoLogOutput
+  public double getPivotPosition() {
+    return endEffectorPivot.getPosition().getValueAsDouble();
   }
 
-  // Get end effector intake
-  public double getEndEffectorIntake() {
-    return endEffectorIntake.get();
+  // Get Pivot Velocity
+  @AutoLogOutput
+  public double getPivotVelocity() {
+    return endEffectorPivot.getVelocity().getValueAsDouble();
   }
+
+  // Get Pivot Current
+  @AutoLogOutput
+  public double getPivotCurrent() {
+    return endEffectorPivot.getSupplyCurrent().getValueAsDouble();
+  }
+
+  // Get Intake Velocity
+  @AutoLogOutput
+  public double getIntakeVelocity() {
+    return endEffectorIntake.getVelocity().getValueAsDouble();
+  }
+
+  // Get Intake Current
+  @AutoLogOutput
+  public double getIntakeCurrent() {
+    return endEffectorIntake.getSupplyCurrent().getValueAsDouble();
+  }
+
+
   
+
 
 
 
