@@ -55,31 +55,33 @@ public final class Constants
     public static final int kEndEffectorIntakeID = 23;
     public static final int kEndEffectorPivotID = 22;
     // End Effector Speeds
-    public static final double kIntakeSpeed = 0.5;
+    public static final double kEndEffectorSpeed = 0.5;
     public static final double kPivotSpeed = 0.5;
     // End Effector Current Spike
-    public static final double kIntakeCurrentSpike = 10;
+    public static final double kEndEffectorCurrentSpike = 10;
     // End Effector PID Values
-    public static final double kIntakePivotPIDValueP = 0;
-    public static final double kIntakePivotPIDValueI = 0;
-    public static final double kIntakePivotPIDValueD = 0;
+    public static final double kEndEffectorPivotPIDValueP = 0;
+    public static final double kEndEffectorPivotPIDValueI = 0;
+    public static final double kEndEffectorPivotPIDValueD = 0;
+    // End Effector Beam Break ID
+    public static final int kEndEffectorBeamBreakID = 1;
 
   }
 
   public static class CoralGroundIntakeConstants 
   {
     // Coral Ground Intake IDs
-    public static final int kCoralIntakeID = 21;
-    public static final int kCoralPivotID = 20;
+    public static final int kCoralGroundIntakeID = 21;
+    public static final int kCoralGroundPivotID = 20;
     // Coral Ground Intake Speeds
-    public static final double kCoralIntakeSpeed = 0.5;
-    public static final double kCoralPivotSpeed = 0.5;
-    // Coral Ground Intake Current Spike
-    public static final double kCoralIntakeCurrentSpike = 10;
+    public static final double kCoralGroundIntakeSpeed = 0.5;
+    public static final double kCoralGroundPivotSpeed = 0.5;
     // Coral Ground Intake PID Values
-    public static final double kCoralPivotPIDValueP = 0;
-    public static final double kCoralPivotPIDValueI = 0;
-    public static final double kCoralPivotPIDValueD = 0;
+    public static final double kCoralGroundPivotPIDValueP = 0;
+    public static final double kCoralGroundPivotPIDValueI = 0;
+    public static final double kCoralGroundPivotPIDValueD = 0;
+    // Coral Ground Beam Break ID
+    public static final int kCoralGroundBeamBreakID = 0;
 
   }
 }

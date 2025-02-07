@@ -22,7 +22,7 @@ import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants.CoralGroundIntakeConstants;
 
-public class CoralGroundIntake extends SubsystemBase {
+public class CoralGroundIntakeSubsystem extends SubsystemBase {
   /** Creates a new CoralGroundIntake. */
 
   private TalonFXS coralIntake;
@@ -37,11 +37,14 @@ public class CoralGroundIntake extends SubsystemBase {
 
   private DigitalInput intakeBeamBreak;
 
-  public CoralGroundIntake() {
+  public CoralGroundIntakeSubsystem() {
     // Coral Ground Intake
-    coralIntake = new TalonFXS(CoralGroundIntakeConstants.kCoralIntakeID);
+    coralIntake = new TalonFXS(CoralGroundIntakeConstants.kCoralGroundIntakeID);
     // Coral Ground Intake Pivot
-    intakePivot = new TalonFX(CoralGroundIntakeConstants.kCoralPivotID);
+    intakePivot = new TalonFX(CoralGroundIntakeConstants.kCoralGroundPivotID);
+
+    // Intake Beam Break
+    intakeBeamBreak = new DigitalInput(CoralGroundIntakeConstants.kCoralGroundBeamBreakID);
 
     // Intake Configs
     intakeConfigs = new TalonFXSConfiguration()
@@ -54,9 +57,9 @@ public class CoralGroundIntake extends SubsystemBase {
     // Pivot Configs
     pivotConfigs = new TalonFXConfiguration()
                         .withSlot0(new Slot0Configs()
-                                      .withKP(CoralGroundIntakeConstants.kCoralPivotPIDValueP)
-                                      .withKI(CoralGroundIntakeConstants.kCoralPivotPIDValueI)
-                                      .withKD(CoralGroundIntakeConstants.kCoralPivotPIDValueD))
+                                      .withKP(CoralGroundIntakeConstants.kCoralGroundPivotPIDValueP)
+                                      .withKI(CoralGroundIntakeConstants.kCoralGroundPivotPIDValueI)
+                                      .withKD(CoralGroundIntakeConstants.kCoralGroundPivotPIDValueD))
                         .withMotorOutput(new MotorOutputConfigs()
                                             .withInverted(InvertedValue.CounterClockwise_Positive)
                                             .withNeutralMode(NeutralModeValue.Brake));
@@ -75,12 +78,12 @@ public class CoralGroundIntake extends SubsystemBase {
   
   // Coral Ground Intake
   public void coralIntake() {
-    coralIntake.set(CoralGroundIntakeConstants.kCoralIntakeSpeed);
+    coralIntake.set(CoralGroundIntakeConstants.kCoralGroundIntakeSpeed);
   }
 
   // Coral Ground Outtake
   public void coralOuttake() {
-    coralIntake.set(-CoralGroundIntakeConstants.kCoralIntakeSpeed);
+    coralIntake.set(-CoralGroundIntakeConstants.kCoralGroundIntakeSpeed);
   }
 
   // Coral Ground Intake Stop
@@ -91,7 +94,7 @@ public class CoralGroundIntake extends SubsystemBase {
   // Intake Coral with Beam Break
   public void intakeCoralWithBeamBreak(){
     if(intakeBeamBreak.get()){
-      coralIntake.set(CoralGroundIntakeConstants.kCoralIntakeSpeed);
+      coralIntake.set(CoralGroundIntakeConstants.kCoralGroundIntakeSpeed);
     }else{
       coralIntake.set(0);
     }
@@ -105,12 +108,12 @@ public class CoralGroundIntake extends SubsystemBase {
 
   // Pivot Intake Up
   public void pivotIntakeUp(){
-    intakePivot.set(CoralGroundIntakeConstants.kCoralPivotSpeed);
+    intakePivot.set(CoralGroundIntakeConstants.kCoralGroundPivotSpeed);
   }
 
   // Pivot Intake Down
   public void pivotIntakeDown(){
-    intakePivot.set(-CoralGroundIntakeConstants.kCoralPivotSpeed);
+    intakePivot.set(-CoralGroundIntakeConstants.kCoralGroundPivotSpeed);
   }
 
   // Pivot Intake Stop

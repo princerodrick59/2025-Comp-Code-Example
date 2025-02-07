@@ -23,7 +23,7 @@ import edu.wpi.first.wpilibj.DutyCycleEncoder;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants.EndEffectorConstants;
 
-public class EndEffector extends SubsystemBase {
+public class EndEffectorSubsystem extends SubsystemBase {
   /** Creates a new EndEffector. */
 
   // End Effector Intake
@@ -45,11 +45,14 @@ public class EndEffector extends SubsystemBase {
   // Position Request
   private PositionVoltage positionRequest;
 
-  public EndEffector() {
+  public EndEffectorSubsystem() {
     // End Effector Intake
     endEffectorIntake = new TalonFXS(EndEffectorConstants.kEndEffectorIntakeID);
     // End Effector Pivot
     endEffectorPivot = new TalonFX(EndEffectorConstants.kEndEffectorPivotID);
+
+    // Intake Beam Break
+    intakeBeamBreak = new DigitalInput(EndEffectorConstants.kEndEffectorBeamBreakID);
 
     // Intake Configs
     intakeConfigs = new TalonFXSConfiguration()
@@ -63,9 +66,9 @@ public class EndEffector extends SubsystemBase {
     // Pivot Configs
     pivotConfigs = new TalonFXConfiguration()
                         .withSlot0(new Slot0Configs()
-                                      .withKP(EndEffectorConstants.kIntakePivotPIDValueP)
-                                      .withKI(EndEffectorConstants.kIntakePivotPIDValueI)
-                                      .withKD(EndEffectorConstants.kIntakePivotPIDValueD))
+                                      .withKP(EndEffectorConstants.kEndEffectorPivotPIDValueP)
+                                      .withKI(EndEffectorConstants.kEndEffectorPivotPIDValueI)
+                                      .withKD(EndEffectorConstants.kEndEffectorPivotPIDValueD))
                         .withMotorOutput(new MotorOutputConfigs()
                                             .withInverted(InvertedValue.CounterClockwise_Positive)
                                             .withNeutralMode(NeutralModeValue.Brake));
@@ -86,12 +89,12 @@ public class EndEffector extends SubsystemBase {
 
   // End Effector Intake
   public void endEffectorIntake() {
-    endEffectorIntake.set(EndEffectorConstants.kIntakeSpeed);
+    endEffectorIntake.set(EndEffectorConstants.kEndEffectorSpeed);
   }
 
   // End Effector Outake
   public void endEffectorOutake() {
-    endEffectorIntake.set(-EndEffectorConstants.kIntakeSpeed);
+    endEffectorIntake.set(-EndEffectorConstants.kEndEffectorSpeed);
   }
 
   // End Effector Stop
@@ -101,10 +104,10 @@ public class EndEffector extends SubsystemBase {
 
   // Intake with current spike detection
   public void intakeCoral() {
-    if (endEffectorIntake.getSupplyCurrent().getValueAsDouble() > EndEffectorConstants.kIntakeCurrentSpike) {
+    if (endEffectorIntake.getSupplyCurrent().getValueAsDouble() > EndEffectorConstants.kEndEffectorCurrentSpike) {
       endEffectorIntake.set(0);
     } else {
-      endEffectorIntake.set(EndEffectorConstants.kIntakeSpeed);
+      endEffectorIntake.set(EndEffectorConstants.kEndEffectorSpeed);
     }
   }
 
@@ -113,14 +116,14 @@ public class EndEffector extends SubsystemBase {
     if (intakeBeamBreak.get()) {
       endEffectorIntake.set(0);
     } else {
-      endEffectorIntake.set(EndEffectorConstants.kIntakeSpeed);
+      endEffectorIntake.set(EndEffectorConstants.kEndEffectorSpeed);
     }
   }
 
   // Do we have coral?
   @AutoLogOutput
   public boolean hasCoral(){
-    return endEffectorIntake.getSupplyCurrent().getValueAsDouble() > EndEffectorConstants.kIntakeCurrentSpike;
+    return endEffectorIntake.getSupplyCurrent().getValueAsDouble() > EndEffectorConstants.kEndEffectorCurrentSpike;
   }
 
   // Do we have algae?
@@ -189,3 +192,11 @@ public class EndEffector extends SubsystemBase {
 
 
 }
+
+
+  
+
+
+
+
+
