@@ -131,7 +131,7 @@ public class CoralGroundIntakeSubsystem extends SubsystemBase {
   // get intake pivot velocity
   @AutoLogOutput(key = "Subsystems/CoralGroundIntakeSubsystem/IntakePivot/CoralGroundPivotVelocity")
   public double getIntakePivotVelocity(){
-    return intakePivot.getVelocity().getValueAsDouble();
+    return intakePivot.get();
   }
 
   // get intake pivot current
@@ -143,7 +143,7 @@ public class CoralGroundIntakeSubsystem extends SubsystemBase {
   // get intake Velocity
   @AutoLogOutput(key = "Subsystems/CoralGroundIntakeSubsystem/Intake/CoralGroundIntakeVelocity")
   public double getIntakeVelocity(){
-    return coralIntake.getVelocity().getValueAsDouble();
+    return coralIntake.get();
   }
 
   // get intake current

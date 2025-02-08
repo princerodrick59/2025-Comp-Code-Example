@@ -114,12 +114,12 @@ public class ElevatorSubsystem extends SubsystemBase {
   // get Elevator Left Motor Velocity
   @AutoLogOutput(key = "Subsystems/ElevatorSubsystem/ElevatorMotors/ElevatorLeftMotorVelocity")
   public double getElevatorLeftMotorVelocity() {
-    return elevatorLeftLeaderMotor.getVelocity().getValueAsDouble();
+    return elevatorLeftLeaderMotor.get();
   }
   // get Elevator Right Motor Velocity
   @AutoLogOutput(key = "Subsystems/ElevatorSubsystem/ElevatorMotors/ElevatorRightMotorVelocity")
   public double getElevatorRightMotorVelocity() {
-    return elevatorRightFollowerMotor.getVelocity().getValueAsDouble();
+    return elevatorRightFollowerMotor.get();
   }
   // get Elevator last Desired Position
   @AutoLogOutput(key = "Subsystems/ElevatorSubsystem/Elevator/ElevatorLastDesiredPosition")

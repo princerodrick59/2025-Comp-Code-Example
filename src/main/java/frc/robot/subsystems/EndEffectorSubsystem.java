@@ -155,7 +155,7 @@ public class EndEffectorSubsystem extends SubsystemBase {
   // Get Pivot Velocity
   @AutoLogOutput(key = "Subsystems/EndEffectorSubsystem/Pivot/EndEffectorPivotVelocity")
   public double getPivotVelocity() {
-    return endEffectorPivot.getVelocity().getValueAsDouble();
+    return endEffectorPivot.get();
   }
 
   // Get Pivot Current
@@ -167,7 +167,7 @@ public class EndEffectorSubsystem extends SubsystemBase {
   // Get Intake Velocity
   @AutoLogOutput(key = "Subsystems/EndEffectorSubsystem/Intake/EndEffectorIntakeVelocity")
   public double getIntakeVelocity() {
-    return endEffectorIntake.getVelocity().getValueAsDouble();
+    return endEffectorIntake.get();
   }
 
   // Get Intake Current

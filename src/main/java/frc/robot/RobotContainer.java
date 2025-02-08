@@ -189,6 +189,7 @@ public class RobotContainer
       m_driverController.rightTrigger().whileTrue(
         m_coralGroundManualOuttake
       );
+      
 
 
 
