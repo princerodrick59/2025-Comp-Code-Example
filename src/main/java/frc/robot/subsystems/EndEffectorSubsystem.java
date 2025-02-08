@@ -67,7 +67,7 @@ public class EndEffectorSubsystem extends SubsystemBase {
     // Pivot Configs
     pivotConfigs = new TalonFXConfiguration()
                         .withMotorOutput(new MotorOutputConfigs()
-                                            .withInverted(InvertedValue.CounterClockwise_Positive)
+                                            .withInverted(InvertedValue.Clockwise_Positive)
                                             .withNeutralMode(NeutralModeValue.Brake));
     // Apply Pivot Configs
     endEffectorPivot.getConfigurator().apply(pivotConfigs);
@@ -84,8 +84,8 @@ public class EndEffectorSubsystem extends SubsystemBase {
     endEffectorIntake.set(EndEffectorConstants.kEndEffectorSpeed);
   }
 
-  // End Effector Outake
-  public void endEffectorOutake() {
+  // End Effector Outtake
+  public void endEffectorOuttake() {
     endEffectorIntake.set(-EndEffectorConstants.kEndEffectorSpeed);
   }
 

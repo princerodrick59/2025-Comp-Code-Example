@@ -50,7 +50,7 @@ public class CoralGroundIntakeSubsystem extends SubsystemBase {
     // Intake Configs
     intakeConfigs = new TalonFXSConfiguration()
                         .withMotorOutput(new MotorOutputConfigs()
-                                              .withInverted(InvertedValue.CounterClockwise_Positive)
+                                              .withInverted(InvertedValue.Clockwise_Positive)
                                               .withNeutralMode(NeutralModeValue.Brake));
     // Apply Intake Configs
     coralIntake.getConfigurator().apply(intakeConfigs);
@@ -101,42 +101,42 @@ public class CoralGroundIntakeSubsystem extends SubsystemBase {
     return intakeBeamBreak.get();
   }
 
-  // Pivot Intake Up
-  public void pivotIntakeUp(){
+  // Intake Pivot Up
+  public void intakePivotUp(){
     intakePivot.set(CoralGroundIntakeConstants.kCoralGroundPivotSpeed);
   }
 
-  // Pivot Intake Down
-  public void pivotIntakeDown(){
+  // Intake Pivot Down
+  public void intakePivotDown(){
     intakePivot.set(-CoralGroundIntakeConstants.kCoralGroundPivotSpeed);
   }
 
-  // Pivot Intake Stop
-  public void pivotIntakeStop(){
+  // Intake Pivot Stop
+  public void intakePivotStop(){
     intakePivot.set(0);
   }
 
-  // Pivot Intake Position
-  public void pivotIntakePosition(double position){
+  // Intake Pivot Position
+  public void intakePivotPosition(double position){
     intakePivot.set(pivotPIDController.calculate(pivotEncoder.get(), position));
   }
 
 
-  // Get Pivot Intake Position
+  // Get Intake Pivot Position
   @AutoLogOutput(key = "Subsystems/CoralGroundIntakeSubsystem/IntakePivot/CoralGroundPivotPosition")
-  public double getPivotIntakePosition(){
+  public double getIntakePivotPosition(){
     return intakePivot.getPosition().getValueAsDouble();
   }
 
-  // get pivot intake velocity
+  // get intake pivot velocity
   @AutoLogOutput(key = "Subsystems/CoralGroundIntakeSubsystem/IntakePivot/CoralGroundPivotVelocity")
-  public double getPivotIntakeVelocity(){
+  public double getIntakePivotVelocity(){
     return intakePivot.getVelocity().getValueAsDouble();
   }
 
-  // get pivot intake current
+  // get intake pivot current
   @AutoLogOutput(key = "Subsystems/CoralGroundIntakeSubsystem/IntakePivot/CoralGroundPivotCurrent")
-  public double getPivotIntakeCurrent(){
+  public double getIntakePivotCurrent(){
     return intakePivot.getSupplyCurrent().getValueAsDouble();
   }
 
@@ -156,9 +156,9 @@ public class CoralGroundIntakeSubsystem extends SubsystemBase {
   public void periodic() {
     // This method will be called once per scheduler run
     SmartDashboard.putBoolean("Subsystems/CoralGroundIntakeSubsystem/Intake/CoralGroundIntakeHasCoral?", hasCoral());
-    SmartDashboard.putNumber("Subsystems/CoralGroundIntakeSubsystem/IntakePivot/CoralGroundPivotPosition", getPivotIntakePosition());
-    SmartDashboard.putNumber("Subsystems/CoralGroundIntakeSubsystem/IntakePivot/CoralGroundPivotVelocity", getPivotIntakeVelocity());
-    SmartDashboard.putNumber("Subsystems/CoralGroundIntakeSubsystem/IntakePivot/CoralGroundPivotCurrent", getPivotIntakeCurrent());
+    SmartDashboard.putNumber("Subsystems/CoralGroundIntakeSubsystem/IntakePivot/CoralGroundPivotPosition", getIntakePivotPosition());
+    SmartDashboard.putNumber("Subsystems/CoralGroundIntakeSubsystem/IntakePivot/CoralGroundPivotVelocity", getIntakePivotVelocity());
+    SmartDashboard.putNumber("Subsystems/CoralGroundIntakeSubsystem/IntakePivot/CoralGroundPivotCurrent", getIntakePivotCurrent());
     SmartDashboard.putNumber("Subsystems/CoralGroundIntakeSubsystem/Intake/CoralGroundIntakeVelocity", getIntakeVelocity());
     SmartDashboard.putNumber("Subsystems/CoralGroundIntakeSubsystem/Intake/CoralGroundIntakeCurrent", getIntakeCurrent());
 
