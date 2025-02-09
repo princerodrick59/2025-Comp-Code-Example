@@ -148,10 +148,9 @@ public class Vision
       Optional<EstimatedRobotPose> poseEst = getEstimatedGlobalPose(camera);
       if (poseEst.isPresent())
       {
-        var pose = poseEst.get();
-        swerveDrive.addVisionMeasurement(pose.estimatedPose.toPose2d(),
-                                         pose.timestampSeconds,
-                                         camera.curStdDevs);
+        swerveDrive.addVisionMeasurement(poseEst.get().estimatedPose.toPose2d(),
+                                         poseEst.get().timestampSeconds,
+                                         camera.multiTagStdDevs);
       }
     }
 
